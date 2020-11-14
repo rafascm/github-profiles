@@ -28,7 +28,11 @@ const Home: React.FC = () => {
           <Heading size="4xl">Github Profiles</Heading>
           <Box mt="6">
             <Link href="./search">
-              <Button colorScheme="purple" rightIcon={<ArrowForwardIcon />}>
+              <Button
+                colorScheme="purple"
+                rightIcon={<ArrowForwardIcon />}
+                focusBorderColor="purple.400"
+              >
                 Search
               </Button>
             </Link>
