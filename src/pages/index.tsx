@@ -20,7 +20,7 @@ const Home: React.FC = () => {
           animate="visible"
           exit="hidden"
           variants={variants}
-          transition={{ ease: 'easeOut', duration: 0.5 }}
+          transition={{ ease: 'easeOut', duration: 0.2 }}
         >
           <Box mb="12">
             <img src="/logo.svg" alt="github" />

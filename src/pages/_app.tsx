@@ -2,9 +2,9 @@ import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from '../theme/theme'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+const MyApp: React.FC<AppProps> = ({ Component, pageProps, router }) => {
   return (
     <ChakraProvider theme={theme} resetCSS>
       <Head>
@@ -15,8 +15,15 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           href="https://github.githubassets.com/favicons/favicon-dark.png"
         />
       </Head>
-      <AnimatePresence>
-        <Component {...pageProps} />
+      <AnimatePresence exitBeforeEnter>
+        <motion.div
+          key={router.route}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <Component {...pageProps} />
+        </motion.div>
       </AnimatePresence>
     </ChakraProvider>
   )
