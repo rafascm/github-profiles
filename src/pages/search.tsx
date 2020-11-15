@@ -11,6 +11,7 @@ import {
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
 import ProfileCard from '../components/ProfileCard'
+import { motion } from 'framer-motion'
 
 const Search: React.FC = () => {
   const [inputValue, setInputValue] = useState('')
@@ -76,7 +77,15 @@ const Search: React.FC = () => {
         </form>
         {user && (
           <Fade in={isOpen}>
-            <ProfileCard user={user} />
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={variants}
+              transition={{ ease: 'easeOut', duration: 0.5 }}
+            >
+              <ProfileCard user={user} />
+            </motion.div>
           </Fade>
         )}
       </Flex>
@@ -84,3 +93,8 @@ const Search: React.FC = () => {
   )
 }
 export default Search
+
+const variants = {
+  hidden: { y: 100 },
+  visible: { y: 0 }
+}
