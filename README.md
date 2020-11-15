@@ -6,6 +6,5 @@
 - Next.js
 - Chakra UI
 - Framer Motion
-- GraphQL
 - ESLint
 - Prettier

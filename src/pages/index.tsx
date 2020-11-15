@@ -8,8 +8,8 @@ const Home: React.FC = () => {
     <Grid
       as="main"
       height="100vh"
-      templateColumns="1fr 64rem 1fr"
-      templateRows="1fr 30rem 1fr"
+      templateColumns="minmax(2rem, 1fr) minmax(auto, 64rem) 1fr"
+      templateRows="repeat(3, 1fr)"
       templateAreas="'. . .''. logo .' '. . .'"
       justifyContent="center"
       alignItems="center"

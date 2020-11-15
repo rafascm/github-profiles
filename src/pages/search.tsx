@@ -4,26 +4,38 @@ import {
   Button,
   Input,
   FormControl,
-  FormLabel
+  FormLabel,
+  useDisclosure,
+  Fade
 } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
+import ProfileCard from '../components/ProfileCard'
 
 const Search: React.FC = () => {
   const [inputValue, setInputValue] = useState('')
+  const { isOpen, onOpen } = useDisclosure()
+  const [user, setUser] = useState(null)
 
   const submitClickHandler = e => {
     e.preventDefault()
     if (inputValue.length < 3) return
+    fetchUser()
     setInputValue('')
+    onOpen()
   }
 
+  const fetchUser = async () => {
+    const response = await fetch(`https://api.github.com/users/${inputValue}`)
+    const data = await response.json()
+    setUser(data)
+  }
   return (
     <Grid
       as="main"
       height="100vh"
-      templateColumns="1fr 64rem 1fr"
-      templateRows="1fr 30rem 1fr"
+      templateColumns="minmax(1rem, 1fr) minmax(auto, 64rem) minmax(1rem, 1fr)"
+      templateRows="1fr 1fr 1fr"
       templateAreas="'. . .''. content .' '. . .'"
       justifyContent="center"
       alignItems="center"
@@ -31,18 +43,27 @@ const Search: React.FC = () => {
       <Flex gridArea="content" flexDir="column" justifyContent="center">
         <form onSubmit={e => submitClickHandler(e)}>
           <FormControl id="search">
-            <FormLabel>Github Profile Username</FormLabel>
-            <Flex>
+            <FormLabel mb="0">Github Profile Username</FormLabel>
+            <Flex
+              justifyContent="space-between"
+              alignItems="center"
+              flexWrap="wrap"
+              spacing=".5rem"
+              maxW="38rem"
+            >
               <Input
+                mt="1rem"
                 colorScheme="purple"
-                placeholder="Insert the username you're looking for..."
+                placeholder="Who are you looking for?"
                 color="gray.200"
                 focusBorderColor="purple.400"
                 value={inputValue}
                 onChange={e => setInputValue(e.target.value)}
+                maxW="30rem"
               />
+
               <Button
-                ml="2"
+                mt="1rem"
                 colorScheme="purple"
                 focusBorderColor="purple.400"
                 rightIcon={<ArrowForwardIcon />}
@@ -53,6 +74,11 @@ const Search: React.FC = () => {
             </Flex>
           </FormControl>
         </form>
+        {user && (
+          <Fade in={isOpen}>
+            <ProfileCard user={user} />
+          </Fade>
+        )}
       </Flex>
     </Grid>
   )
