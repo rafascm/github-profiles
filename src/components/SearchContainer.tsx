@@ -16,5 +16,6 @@ const gridProps: GridProps = {
   templateRows: '1fr 1fr 1fr',
   templateAreas: "'. . .''. content .' '. . .'",
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  mt: '1rem'
 }

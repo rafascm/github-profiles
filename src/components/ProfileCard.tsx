@@ -6,7 +6,6 @@ import MainInfo from './ProfileCardMainInfo'
 type Props = { user: Record<string, string>; isOpen: boolean }
 
 const ProfileCard: React.FC<Props> = ({ user, isOpen }) => {
-  console.log(user)
   return (
     <Container isOpen={isOpen}>
       <MainInfo user={user} />

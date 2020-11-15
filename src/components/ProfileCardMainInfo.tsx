@@ -1,4 +1,4 @@
-import { Flex, FlexProps, Image, Text, Box } from '@chakra-ui/react'
+import { Flex, FlexProps, Image, Text } from '@chakra-ui/react'
 
 type Props = { user: Record<string, string> }
 
@@ -16,10 +16,6 @@ const ProfileCardMainInfo: React.FC<Props> = ({ user }) => (
     <Text fontSize="2xl" color="gray.800" mb="1rem" fontWeight="bold">
       {user.login}
     </Text>
-    <Flex>
-      <Box></Box>
-      <Box></Box>
-    </Flex>
   </Flex>
 )
 

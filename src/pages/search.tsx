@@ -6,21 +6,29 @@ import SearchForm from '../components/SearchForm'
 
 const Search: React.FC = () => {
   const [inputValue, setInputValue] = useState('')
-  const { isOpen, onOpen } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
   const [user, setUser] = useState(null)
 
-  const submitClickHandler = (e: FormEvent<HTMLFormElement>) => {
+  const submitClickHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (inputValue.length < 3) return
     fetchUser()
     setInputValue('')
-    onOpen()
+    setTimeout(onOpen, 500)
   }
 
   const fetchUser = async () => {
-    const response = await fetch(`https://api.github.com/users/${inputValue}`)
-    const data = await response.json()
-    setUser(data)
+    try {
+      onClose()
+      setUser(null)
+
+      const data = await (
+        await fetch(`https://api.github.com/users/${inputValue}`)
+      ).json()
+      data.id && setUser(data)
+    } catch (error) {
+      alert('Not found')
+    }
   }
 
   return (
